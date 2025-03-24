@@ -5,15 +5,25 @@
  * TODO: Edit these comments to leave a puzzle for your section leader to solve!
  */
 #include "OnlyConnect.h"
+#include <string>
+#include <cctype>
 using namespace std;
 
 string onlyConnectize(string phrase) {
-    /* TODO: The next few lines just exist to make sure you don't get compiler
-     * warning messages when this function isn't implemented. Delete this
-     * comment and the next few lines, then implement this function.
-     */
-    (void) phrase;
-    return "";
+
+    if (phrase.empty()) return "";
+
+    char vowels[10] = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+    char firstchar = phrase[0];
+
+    for (int i = 0; i < 10; i++) {
+        if (firstchar == vowels[i]) {
+            return onlyConnectize(phrase.substr(1));
+        }
+    }
+
+
+    return string(1, toupper(firstchar)) + onlyConnectize(phrase.substr(1));
 }
 
 
