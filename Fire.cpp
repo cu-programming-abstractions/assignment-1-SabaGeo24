@@ -2,11 +2,49 @@
 using namespace std;
 
 void updateFire(Grid<int>& fire) {
-    /* TODO: The next line just exists to make sure you don't get compiler warning messages
-     * when this function isn't implemented. Delete this comment and the next line, then
-     * implement this function.
-     */
-    (void) fire;
+
+
+    const int NumRows = fire.numRows();
+    const int NumCols = fire.numCols();
+
+    for(int rows = 1; rows < NumRows; rows++)
+    {
+        for(int cols = 0; cols < NumCols; cols++)
+        {
+            int dir;
+
+            if(NumCols == 1)
+            {
+                dir = 0;
+            }
+
+            if(cols == 0 && NumCols != 1)
+            {
+                dir = randomInteger(0, 1);
+            }else if(cols == NumCols - 1 && NumCols != 1)
+            {
+                dir = randomInteger(-1, 0);
+            }else if (NumCols != 1)
+            {
+                dir = randomInteger(-1,1);
+            }
+
+            if(fire[rows][cols] >= 0)
+            {
+                fire[rows - 1][cols + dir] = fire[rows][cols];
+            }
+
+            if(randomInteger(0, 2) < 2 && fire[rows - 1][cols + dir] != 0)
+            {
+                fire[rows - 1][cols + dir] -= 1;
+            }
+
+        }
+    }
+
+
+
+
 }
 
 
